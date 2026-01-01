@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 import localFont from "next/font/local";
 import getConfig from "next/config";
+import { ThemeProvider } from "@/components/theme-provider";
+import { Toaster } from "@/components/ui/sonner";
 
 const geistMono = localFont({
   src: "../public/fonts/GeistMonoVF.woff",
@@ -46,7 +48,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${poppinsSans.variable} ${poppinsSemi.variable} ${archivo.variable} ${loraSerif.variable} ${geistMono.variable}  antialiased`}>
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
+        <Toaster richColors position="top-center" />
       </body>
     </html>
   );

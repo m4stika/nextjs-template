@@ -4,4 +4,5 @@
 - 1.0.0
   ```
   - feat: system initialization
+  - feat: add side-bar
   ```
