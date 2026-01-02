@@ -1,6 +1,7 @@
 import CardPage from "@/components/card-page";
 import { BookOpen } from "lucide-react";
 
+export const metadata = { title: `Daftar Perkiraan` };
 export default function AccountingPage() {
   return (
     <CardPage

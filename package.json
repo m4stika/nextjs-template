@@ -1,7 +1,7 @@
 {
   "name": "kgs-web",
   "version": "1.0.0",
-  "title": "SiPaDu",
+  "title": "Roondev",
   "description": "Sistem Informasi Keuangan",
   "author": "Roonisland dev",
   "contact": "+62 896-7011-3010",
@@ -23,6 +23,8 @@
     "@tanstack/react-query": "^5.90.16",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "jotai": "^2.16.1",
+    "jotai-family": "^1.0.1",
     "lucide-react": "^0.511.0",
     "next": "15.3.2",
     "next-themes": "^0.4.6",

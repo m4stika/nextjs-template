@@ -7,7 +7,7 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
 import Image from "next/image"
-import sigapImg from "@/public/images/sigap-logo.png"
+import sigapImg from "@/public/images/roondev-logo.png"
 import getConfig from "next/config"
 import Link from "next/link"
 

@@ -4,13 +4,13 @@
 import React from 'react'
 import { Copy, Filter, Pen, Plus, Printer, RefreshCw, Trash } from 'lucide-react';
 import { VisibleButton } from '@/lib/common';
-// import { useTableState } from '@/hooks/use-table-state'
-// import { useQueryClient } from '@tanstack/react-query';
-// import { useRouter } from 'next/navigation';
+import { useTableState } from '@/hooks/use-table-state'
+import { useQueryClient } from '@tanstack/react-query';
+import { useRouter } from 'next/navigation';
 import { Button } from './ui/button';
-// import { isEmpty } from '@/lib/utils';
-// import { usePaginations } from '@/hooks/use-pagination';
-// import dateFormatter from '@/lib/date-formater';
+import { isEmpty } from '@/lib/utils';
+import { usePaginations } from '@/hooks/use-pagination';
+import dateFormatter from '@/lib/date-formater';
 
 interface InputProps extends React.HTMLAttributes<HTMLElement> {
   visibleControl?: VisibleButton[];
@@ -86,64 +86,59 @@ const controls: Control[] = [
 type TData = Record<"id", string> & Record<string, string>;
 const PageActions = ({
   visibleControl = ["new", "copy", "edit", "delete"],
-  // baseUrl,
-  // queryKey,
-  // secondRoute,
-  // contentFilter,
+  baseUrl,
+  queryKey,
+  secondRoute,
+  contentFilter,
 }: InputProps) => {
-  // const { itemSelected } = useTableState()
-  // const isSelected = itemSelected ? isEmpty(itemSelected) : false
+  const { itemSelected } = useTableState()
+  const isSelected = itemSelected ? isEmpty(itemSelected) : false
 
-  // const dataId: string = isSelected ? (itemSelected as TData)?.id : "";
-  // const queryClient = useQueryClient();
-  // const router = useRouter();
-  // const { pagination } = usePaginations(queryKey[0])
+  const dataId: string = isSelected ? (itemSelected as TData)?.id : "";
+  const queryClient = useQueryClient();
+  const router = useRouter();
+  const { pagination } = usePaginations(queryKey[0])
 
   const CreateButton = (propItems: { item: Control }) => {
-    return (
-      <Button size={"icon"} variant={"ghost"}>
-        <RefreshCw />
-      </Button>
+    const { mode, label, icon, alwaysOn } = propItems.item;
+    const newId: string = ["menu", "new"].includes(mode) ? "new" : dataId;
+    const newMode: string = ["menu", "new"].includes(mode) ? "new" : mode === "print" ? "" : mode;
+    let hrefWithProps: string;
+    const routeSplit = secondRoute?.split("/");
+    if (routeSplit && routeSplit[0] === "context") {
+      if (pagination) {
+        const dateFrom = dateFormatter(pagination.dateFrom!, 'yyyy-MM-dd');
+        const dateTo = dateFormatter(pagination.dateTo!, 'yyyy-MM-dd');
+        const SearchId = pagination.SearchId;
+        hrefWithProps = `${baseUrl}/${dateFrom}X${dateTo}/${SearchId}`;
+      }
+    } else
+      hrefWithProps = secondRoute
+        ? `${baseUrl}/${newId}/${newMode}/${secondRoute}`
+        : `${baseUrl}/${newId}/${newMode}`;
+    return mode === "filter" ? (
+      contentFilter && contentFilter
     )
-    // const { mode, label, icon, alwaysOn } = propItems.item;
-    // const newId: string = ["menu", "new"].includes(mode) ? "new" : dataId;
-    // const newMode: string = ["menu", "new"].includes(mode) ? "new" : mode === "print" ? "" : mode;
-    // let hrefWithProps: string;
-    // const routeSplit = secondRoute?.split("/");
-    // if (routeSplit && routeSplit[0] === "context") {
-    //   if (pagination) {
-    //     const dateFrom = dateFormatter(pagination.dateFrom!, 'yyyy-MM-dd');
-    //     const dateTo = dateFormatter(pagination.dateTo!, 'yyyy-MM-dd');
-    //     const SearchId = pagination.SearchId;
-    //     hrefWithProps = `${baseUrl}/${dateFrom}X${dateTo}/${SearchId}`;
-    //   }
-    // } else
-    //   hrefWithProps = secondRoute
-    //     ? `${baseUrl}/${newId}/${newMode}/${secondRoute}`
-    //     : `${baseUrl}/${newId}/${newMode}`;
-    // return mode === "filter" ? (
-    //   contentFilter && contentFilter
-    // )
-    //   : (
-    //     <Button
-    //       name={mode}
-    //       aria-label={`${label} button`}
-    //       size={"icon"}
-    //       // className={cn('size-10 [&_svg]:size-5')}
-    //       variant={"ghost"}
-    //       disabled={!alwaysOn && !isSelected}
-    //       onClick={() => {
-    //         if (mode === "print") {
-    //           const windowPdf = window.open(`${hrefWithProps}`, "_blank");
-    //           return windowPdf?.focus();
-    //         } else if (mode === "refresh") {
-    //           queryClient.invalidateQueries({ queryKey });
-    //         } else return router.push(hrefWithProps);
-    //       }}
-    //     >
-    //       {icon}
-    //     </Button>
-    //   )
+      : (
+        <Button
+          name={mode}
+          aria-label={`${label} button`}
+          size={"icon"}
+          // className={cn('size-10 [&_svg]:size-5')}
+          variant={"ghost"}
+          disabled={!alwaysOn && !isSelected}
+          onClick={() => {
+            if (mode === "print") {
+              const windowPdf = window.open(`${hrefWithProps}`, "_blank");
+              return windowPdf?.focus();
+            } else if (mode === "refresh") {
+              queryClient.invalidateQueries({ queryKey });
+            } else return router.push(hrefWithProps);
+          }}
+        >
+          {icon}
+        </Button>
+      )
   }
 
   return (

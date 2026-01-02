@@ -2,16 +2,12 @@
 "use client";
 
 import { Input } from "@/components/ui/input";
-// import { usePaginations } from "@/hooks/use-pagination";
+import { usePaginations } from "@/hooks/use-pagination";
 import { debounce } from "@/lib/utils";
 import { useState } from "react";
 
 export function Search({ queryKey }: { queryKey: string }) {
-  const tempPagination = {
-    SearchId: queryKey
-  }
-  // const { setId, pagination } = usePaginations(queryKey)
-  const [pagination, setId] = useState<{ SearchId: string } | undefined>(tempPagination)
+  const { setId, pagination } = usePaginations(queryKey)
   const [internalValue, setInternalValue] = useState<string>(
     pagination && pagination.SearchId && pagination.SearchId !== "" ? pagination.SearchId : ""
   );

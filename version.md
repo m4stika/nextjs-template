@@ -5,4 +5,5 @@
   ```
   - feat: system initialization
   - feat: add side-bar
+  - feat: add jotai state management
   ```
