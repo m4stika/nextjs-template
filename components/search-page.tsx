@@ -1,10 +1,15 @@
 
 "use client";
 
-import { Input } from "@/components/ui/input";
 import { usePaginations } from "@/hooks/use-pagination";
 import { debounce } from "@/lib/utils";
 import { useState } from "react";
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupInput,
+} from "@/components/ui/input-group"
+import { SearchIcon } from "lucide-react";
 
 export function Search({ queryKey }: { queryKey: string }) {
   const { setId, pagination } = usePaginations(queryKey)
@@ -23,14 +28,23 @@ export function Search({ queryKey }: { queryKey: string }) {
   }, 1000);
 
   return (
-    <div>
-      <Input
-        defaultValue={internalValue}
-        type="search"
-        placeholder="Search..."
-        className="md:w-[100px] lg:w-[300px]"
-        onChange={_onChange}
-      />
-    </div>
+    <InputGroup>
+      <InputGroupInput placeholder="Search..." onChange={_onChange} defaultValue={internalValue} />
+      <InputGroupAddon>
+        <SearchIcon />
+      </InputGroupAddon>
+      {/* <InputGroupAddon align="inline-end"> */}
+      {/*   <InputGroupButton>Search</InputGroupButton> */}
+      {/* </InputGroupAddon> */}
+    </InputGroup>
+    // <div>
+    //   <Input
+    //     defaultValue={internalValue}
+    //     type="search"
+    //     placeholder="Search..."
+    //     className="md:w-[100px] lg:w-[300px]"
+    //     onChange={_onChange}
+    //   />
+    // </div>
   );
 }
