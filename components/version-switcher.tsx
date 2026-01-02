@@ -8,11 +8,10 @@ import {
 } from "@/components/ui/sidebar"
 import Image from "next/image"
 import sigapImg from "@/public/images/roondev-logo.png"
-import getConfig from "next/config"
 import Link from "next/link"
 
 export function VersionSwitcher() {
-  const { publicRuntimeConfig } = getConfig();
+  // const { publicRuntimeConfig } = getConfig();
 
   return (
     <SidebarMenu>
@@ -31,8 +30,10 @@ export function VersionSwitcher() {
               priority={true}
             />
             <div className="flex flex-col gap-0.5 leading-none">
-              <span className="font-medium">{publicRuntimeConfig.title}</span>
-              <span className="">v {publicRuntimeConfig.version}</span>
+              {/* <span className="font-medium">{publicRuntimeConfig.title}</span> */}
+              {/* <span className="">v {publicRuntimeConfig.version}</span> */}
+              <span className="font-medium">{process.env.NEXT_PUBLIC_TITLE}</span>
+              <span className="">v {process.env.NEXT_PUBLIC_VERSION}</span>
             </div>
           </Link>
         </SidebarMenuButton>

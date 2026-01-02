@@ -23,15 +23,15 @@ const data: SideBarProp = {
   versions: ["1.0.1", "1.1.0-alpha", "2.0.0-beta1"],
   navMain: [
     {
-      title: "Master",
+      title: "Pelayanan",
       url: "#",
       items: [
         {
-          title: "chart of account",
-          url: "accounting",
+          title: "Master Unit",
+          url: "#",
         },
         {
-          title: "Project Structure",
+          title: "Monitoring",
           url: "#",
         },
       ],
@@ -41,30 +41,34 @@ const data: SideBarProp = {
       url: "#",
       items: [
         {
-          title: "Routing",
+          title: "Saldo Awal kas/bank",
           url: "#",
         },
         {
-          title: "Data Fetching",
+          title: "Penerimaan",
           url: "#",
           isActive: true,
         },
         {
-          title: "Rendering",
+          title: "Pengeluaran",
           url: "#",
         },
       ],
     },
     {
-      title: "Keuangan",
+      title: "General Leadger",
       url: "#",
       items: [
         {
-          title: "Components",
+          title: "Daftar Perkiraan",
+          url: "accounting",
+        },
+        {
+          title: "Neraca Awal",
           url: "#",
         },
         {
-          title: "File Conventions",
+          title: "Journal Transaksi",
           url: "#",
         },
       ],
@@ -74,7 +78,15 @@ const data: SideBarProp = {
       url: "#",
       items: [
         {
-          title: "Contribution Guide",
+          title: "Pelayanan",
+          url: "#",
+        },
+        {
+          title: "Keuangan",
+          url: "#",
+        },
+        {
+          title: "General Leadger",
           url: "#",
         },
       ],

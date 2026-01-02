@@ -1,5 +1,4 @@
 import { AppSidebar } from "@/components/app-sidebar"
-import QueryProviders from "@/components/query-client-provider"
 import { SiteFooter } from "@/components/site-footer"
 import SiteHeader from "@/components/site-header"
 import {
@@ -17,9 +16,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
       <AppSidebar />
       <SidebarInset>
         <SiteHeader stringPath={strings} />
-        <QueryProviders>
-          {children}
-        </QueryProviders>
+        {children}
         <SiteFooter />
       </SidebarInset>
     </SidebarProvider>

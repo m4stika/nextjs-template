@@ -24,14 +24,19 @@ const nextConfig: NextConfig = {
   env: {
     NEXT_PUBLIC_HOST_FILES: process.env.HOST_FILES,
     NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || process.env.API_URL,
+    NEXT_PUBLIC_VERSION: version,
+    NEXT_PUBLIC_TITLE: title,
+    NEXT_PUBLIC_DESCRIPTION: description,
+    NEXT_PUBLIC_AUTHOR: author,
+    NEXT_PUBLIC_CONTACT: contact,
   },
-  publicRuntimeConfig: {
-    version,
-    title,
-    description,
-    author,
-    contact,
-  },
+  // publicRuntimeConfig: {
+  //   version,
+  //   title,
+  //   description,
+  //   author,
+  //   contact,
+  // },
 };
 
 export default nextConfig;

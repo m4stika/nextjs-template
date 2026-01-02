@@ -1,7 +1,6 @@
 
 "use client";
 
-// type TParam = string[][] | Record<string, string> | string | URLSearchParams
 type TParam = any
 async function request<T>(
   url: string,
@@ -22,16 +21,10 @@ async function request<T>(
   const baseUrl = process.env.NEXT_PUBLIC_API_URL || "/api";
   const urlRegex = url.replace(regex, "");
   let fullUrl = `${baseUrl}/${urlRegex}`;
-  // console.log("url", { fullUrl, env: process.env.NEXT_PUBLIC_API_URL, baseUrl })
-  // if (params !== undefined || params !== null) {
-  //   const initParams = new URLSearchParams(params);
-  //   fullUrl += `/?${initParams}`;
-  // }
   if (params) {
     const initParams = new URLSearchParams(params);
     fullUrl += `/?${initParams}`;
   }
-  // console.log("URLSearchParams", fullUrl);
 
 
   const requestHttp = new Request(fullUrl, init);
@@ -47,18 +40,12 @@ async function request<T>(
       statusCode: response.status,
       ...data
     } as ApiResponse<T>))
-    // return response.json();
-    // return buffer.byteLength > 0 ? { status: "success", data: buffer } : response.json();
   } catch (error) {
     return {
       statusCode: 500,
       status: "error",
       message: "Something went wrong [Server API Disconnected]"
     } as ApiResponse<T>
-
-    // router.replace(
-    //   "/?message=Something went wrong [Server API Disconnected]&server_error_status=500"
-    // );
   }
 }
 type ContentType = "multipart/form-data" | "application/json";
@@ -85,7 +72,6 @@ const renderBodyFormat = <TData extends Record<string, unknown>>(data: TData, ty
         } else form.append(key, value as any);
         // form.append(key, data[key]);
       });
-      // console.log("form", form);
       return form;
     },
   };

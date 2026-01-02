@@ -21,6 +21,6 @@ export type Pagination = {
 };
 
 export type TableState = {
-  itemSelected?: Object
+  itemSelected?: object
   tableActive?: unknown
 }

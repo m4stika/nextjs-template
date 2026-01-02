@@ -1,5 +1,4 @@
 // import { apiServer } from "@/lib/server-api"
-import getConfig from "next/config"
 import { use } from "react"
 
 const getApiVersion = async () => {
@@ -11,7 +10,7 @@ const getApiVersion = async () => {
 
 export function SiteFooter() {
   const apiVersion = use(getApiVersion())
-  const { publicRuntimeConfig } = getConfig();
+  // const { publicRuntimeConfig } = getConfig();
   return (
     <footer className="border-t  py-2 dark:border-border md:px-8 md:py-0">
       <div className="flex flex-col items-center  gap-2 md:h-12 md:flex-row cursor-default">
@@ -21,7 +20,7 @@ export function SiteFooter() {
           {`API (${apiVersion}) `}
         </p>
         <p className="flex-1 text-balance text-right text-sm leading-loose text-muted-foreground ">
-          {`Contact-us : ${publicRuntimeConfig.contact}`}
+          {`Contact-us : ${process.env.NEXT_PUBLIC_CONTACT}`}
         </p>
       </div>
     </footer>

@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import localFont from "next/font/local";
-import getConfig from "next/config";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
+import QueryProviders from "@/components/query-client-provider"
 
 const geistMono = localFont({
   src: "../public/fonts/GeistMonoVF.woff",
@@ -31,13 +31,13 @@ const poppinsSemi = localFont({
   weight: "400 600 900",
 });
 
-const { publicRuntimeConfig } = getConfig();
+// const { publicRuntimeConfig } = getConfig();
 export const metadata: Metadata = {
   title: {
-    default: `${process.env.APP_TITLE ?? publicRuntimeConfig?.title}`,
-    template: `%s - ${process.env.APP_TITLE ?? publicRuntimeConfig?.title}`,
+    default: `${process.env.APP_TITLE ?? process.env.NEXT_PUBLIC_TITLE}`,
+    template: `%s - ${process.env.APP_TITLE ?? process.env.NEXT_PUBLIC_TITLE}`,
   },
-  description: `${process.env.APP_DESCRIPTION ?? publicRuntimeConfig?.description}`,
+  description: `${process.env.APP_DESCRIPTION ?? process.env.NEXT_PUBLIC_DESCRIPTION}`,
 };
 
 export default function RootLayout({
@@ -54,7 +54,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <QueryProviders>
+            {children}
+          </QueryProviders>
         </ThemeProvider>
         <Toaster richColors position="top-center" />
       </body>
