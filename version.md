@@ -9,4 +9,5 @@
   - mod: upgrade nextjs version
   - fix: change publicRuntimeConfig -> NEXT_PUBLIC Environment
   - mod: add Dockerfile & .dockerignore
+  - mod: upgrade nextjs version 15 to 16
   ```
